@@ -175,36 +175,6 @@ select * from "C23401212".owner;
 
 
 
--- Individual work:
-/* PROGRAMMED TRANSACTION and TRIGGER (3 marks): Write a PLpgSQL function or procedure with parameters to
-run a transaction to change the data in the database and leave it in a consistent state. It should include decision-
-making and error checking and it should be appropriate to your user role. */
-
-CREATE OR REPLACE FUNCTION addsupplier(
-p_sname character varying, p_ph character)
- RETURNS integer
- LANGUAGE plpgsql
-AS $function$
-DECLARE
-      v_supplier_id integer;
-begin
-        insert into "C23401212".sh_supplier (sname, sph)
-		values (p_sname, p_ph) returning supplier_id into v_supplier_id;
-        RETURN v_supplier_id;
-exception
-when others then
-        RAISE INFO 'Error Name:%',SQLERRM;
-        RAISE INFO 'Error State:%', SQLSTATE;
-        return null;
-END;
-$function$
-;
-
-
-
-
-
-
 
 
 
